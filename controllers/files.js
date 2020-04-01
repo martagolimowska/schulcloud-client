@@ -912,7 +912,7 @@ router.get('/search/', (req, res, next) => {
 });
 
 /** fetch all personal folders and all course folders in a directory-tree * */
-router.get('/permittedDirectories/', async (req, res) => {
+router.get('/permittedDirectories/', async (req, res, next) => {
 	const extractor = ({ _id, name }) => ({ _id, name, children: [] });
 
 	const directoryTree = [{
@@ -954,7 +954,7 @@ router.get('/permittedDirectories/', async (req, res) => {
 			});
 
 			return res.json(directoryTree);
-		});
+		}).catch(next);
 });
 
 /** File and Directory proxy models */
