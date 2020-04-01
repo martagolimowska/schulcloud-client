@@ -236,7 +236,8 @@ app.use((err, req, res, next) => {
 	}
 
 	res.locals.error = req.app.get('env') === 'development' ? err : { status };
-	if (err.error) logger.error(err.error);
+	const errToLog = err.error || err;
+	logger.error(errToLog);
 	if (res.locals.currentUser) res.locals.loggedin = true;
 	// render the error page
 	res.status(status).render('lib/error', {
